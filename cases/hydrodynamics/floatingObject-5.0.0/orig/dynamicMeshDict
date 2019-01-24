@@ -1,0 +1,92 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  5                                  |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      motionProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dynamicFvMesh       dynamicMotionSolverFvMesh;
+
+motionSolverLibs   ("librigidBodyMeshMotion.so");
+
+solver             rigidBodyMotion;
+
+rigidBodyMotionCoeffs
+{
+    report          on;
+
+    solver
+    {
+        type Newmark;
+    }
+
+    accelerationRelaxation 0.7; //0.7
+
+    bodies
+    {
+        floatingObject
+        {
+            //report          on;
+            type            cuboid;
+            parent          root;
+
+            // Cuboid dimensions
+            Lx              1.4;
+            Ly              0.1;
+            Lz              0.8;
+
+            // Density of the cuboid
+            rho             SED_DENSITY ;
+
+            // Cuboid mass
+            mass            #calc "$rho*$Lx*$Ly*$Lz";
+            L               ($Lx $Ly $Lz);
+            centreOfMass    (0 0 0.4);
+            transform       (1 0 0 0 1 0 0 0 1) (10 0.05 1.1);
+
+            joint
+            {
+                type            composite;
+                joints
+                (
+                    {
+                        type Pz;
+                    }
+                );
+            }
+
+            patches         (floatingObject);
+            innerDistance   0.1;
+            outerDistance   0.7;
+        }
+    }
+}
+functions
+{
+    report          on;
+    forces
+    {
+        report          on;
+        type            forces;
+        functionObjectLibs ("libforces.so");
+        outputControl   outputTime;
+        patches         (floatingObject);
+        pName           p;
+        UName           U;
+        rhoName         rhoInf;
+        log             yes;
+        rhoInf          1000;
+        CofR            (0 0 0);
+    }
+}
+
+// ************************************************************************* //

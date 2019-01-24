@@ -1,0 +1,51 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1806                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      waveProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+inlet
+{
+    	alpha           alpha.water;
+
+    	waveModel       StokesII;
+
+    	nPaddle         1;
+	
+    	waveAngle       0.0;
+
+    	rampTime        5.0;
+
+    	activeAbsorption no;
+
+    	waveHeight 0.5;
+
+    	wavePeriod 5;
+	
+	wavePhase 0;
+
+	waveDir  0;
+}
+
+outlet
+{
+	alpha           alpha.water;
+
+    	waveModel       shallowWaterAbsorption;
+
+    	nPaddle         1;
+}
+
+// ************************************************************************* //
+

@@ -1,0 +1,59 @@
+#!/bin/sh
+
+cd ${0%/*} || exit 1    
+
+blockMesh > blockMesh.log
+topoSet
+subsetMesh -overwrite c0 -patch floatingObject
+cp -r 0.orig 0 > /dev/null 2>&1
+setFields > setFields.log
+
+echo "Please enter the type of wave (regular, irregular)"
+read wavetype
+
+echo "Please enter the studied time"
+read endtime
+cp orig/controlDict system/controlDict
+sed -i "s/SED_ENDTIME/$endtime/" system/controlDict
+cp orig/JonSwap.py JonSwap.py
+sed -i "s/SED_ENDTIME/$endtime/" JonSwap.py
+cp orig/floatObj.py floatObj.py
+sed -i "s/SED_ENDTIME/$endtime/" floatObj.py
+
+if  [ "$wavetype" = "irregular" ]; then
+	cp orig/waveDict.irregular constant/waveDict
+	python JonSwap.py
+	olaDyMFlow >> olaDyMFlow.log
+	python floatObj.py
+
+elif [ "$wavetype" = "regular" ]; then
+	cp orig/waveDict.regular constant/waveDict
+	cd constant
+
+	echo "Please enter the waveTheory"
+	read waveTheory
+        sed -i "s/SED_THEORY/$waveTheory/" waveDict
+
+	echo "Please enter the wavePeriod"
+	read wavePeriod
+        sed -i "s/SED_PERIOD/$wavePeriod/" waveDict
+
+	echo "Please enter the waveHeight"
+	read waveHeight
+        sed -i "s/SED_HEIGHT/$waveHeight/" waveDict
+
+	echo "Please enter the waveDirection"
+	read waveDir
+        sed -i "s/SED_DIR/$waveDir/" waveDict
+
+	echo "Please enter the wavePhase"
+	read wavePhase
+        sed -i "s/SED_PHASE/$wavePhase/" waveDict
+
+	cd ..
+	olaDyMFlow >> olaDyMFlow.log
+	python floatObj.py
+fi
+
+
+# ----------------------------------------------------------------- end-of-file

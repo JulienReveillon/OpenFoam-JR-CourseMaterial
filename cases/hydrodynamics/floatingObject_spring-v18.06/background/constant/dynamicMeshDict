@@ -1,0 +1,105 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  plus                                  |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      motionProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+motionSolverLibs    ("libsixDoFRigidBodyMotion.so");
+motionSolver    sixDoFRigidBodyMotion;
+
+dynamicFvMesh       dynamicOversetFvMesh;
+
+dynamicOversetFvMeshCoeffs
+{
+}
+
+sixDoFRigidBodyMotionCoeffs
+{
+
+    patches         (floatingObject);
+    innerDistance   100.0;
+    outerDistance   101.0;
+
+    report		on;
+    reportToFile	on;
+
+    velocity (0 0 0);
+
+    centreOfMass    (10 0.05 5);
+
+    // Cuboid dimensions
+    Lx              1.4;
+    Ly              0.1;
+    Lz              0.8;
+
+    // Density of the solid
+    rhoSolid        500;
+
+    // Cuboid mass
+    mass            #calc "$rhoSolid*$Lx*$Ly*$Lz";
+
+    // Cuboid moment of inertia about the centre of mass
+    momentOfInertia #codeStream
+    {
+        codeInclude
+        #{
+            #include "diagTensor.H"
+        #};
+
+        code
+        #{
+            scalar sqrLx = sqr($Lx);
+            scalar sqrLy = sqr($Ly);
+            scalar sqrLz = sqr($Lz);
+            os  <<
+                $mass
+               *diagTensor(sqrLy + sqrLz, sqrLx + sqrLz, sqrLx + sqrLy)/12.0;
+        #};
+    };
+
+    report          on;
+    accelerationRelaxation 0.85;
+
+    solver
+    {
+        type Newmark;
+    }
+
+    constraints
+    {
+
+        fixedAxis
+        {
+            sixDoFRigidBodyMotionConstraint axis;
+            axis    (0 1 0);
+
+        }
+    }
+
+    restraints
+    {
+    
+    	linearSpring
+    	{
+	    sixDoFRigidBodyMotionRestraint linearSpring;
+	    anchor (10.0 0.05 0);
+	    refAttachmentPt (10.0 0.05 4.6);
+	    stiffness 100.0; 
+	    damping 0.0;
+	    restLength 1.0; 
+    	}
+    }
+
+}
+
+// ************************************************************************* //

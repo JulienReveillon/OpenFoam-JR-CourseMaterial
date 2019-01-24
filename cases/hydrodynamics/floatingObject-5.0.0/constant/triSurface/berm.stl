@@ -1,0 +1,86 @@
+solid diqueMixto
+ facet normal 0.000000e+00 1.159744e-16 1.000000e+00
+   outer loop
+     vertex 1.090000e+01 -1.572988e-01 4.000010e-01
+     vertex 9.100000e+00 8.000010e-01 4.000010e-01
+     vertex 9.100000e+00 -1.572988e-01 4.000010e-01
+   endloop
+ endfacet
+ facet normal 0.000000e+00 1.159744e-16 1.000000e+00
+   outer loop
+     vertex 1.090000e+01 -1.572988e-01 4.000010e-01
+     vertex 1.090000e+01 8.000010e-01 4.000010e-01
+     vertex 9.100000e+00 8.000010e-01 4.000010e-01
+   endloop
+ endfacet
+ facet normal 5.546999e-01 9.649658e-17 8.320505e-01
+   outer loop
+     vertex 1.090000e+01 8.000010e-01 4.000010e-01
+     vertex 1.090000e+01 -1.572988e-01 4.000010e-01
+     vertex 1.150000e+01 -1.572988e-01 1.000000e-06
+   endloop
+ endfacet
+ facet normal 5.546999e-01 9.237583e-17 8.320505e-01
+   outer loop
+     vertex 1.150000e+01 8.000010e-01 1.000000e-06
+     vertex 1.090000e+01 8.000010e-01 4.000010e-01
+     vertex 1.150000e+01 -1.572988e-01 1.000000e-06
+   endloop
+ endfacet
+ facet normal 0.000000e+00 -1.110219e-16 -1.000000e+00
+   outer loop
+     vertex 1.150000e+01 8.000010e-01 1.000000e-06
+     vertex 1.150000e+01 -1.572988e-01 1.000000e-06
+     vertex 8.500000e+00 -1.572988e-01 1.000000e-06
+   endloop
+ endfacet
+ facet normal -0.000000e+00 -1.110219e-16 -1.000000e+00
+   outer loop
+     vertex 1.150000e+01 8.000010e-01 1.000000e-06
+     vertex 8.500000e+00 -1.572988e-01 1.000000e-06
+     vertex 8.500000e+00 8.000010e-01 1.000000e-06
+   endloop
+ endfacet
+ facet normal -5.546999e-01 9.237583e-17 8.320505e-01
+   outer loop
+     vertex 8.500000e+00 8.000010e-01 1.000000e-06
+     vertex 8.500000e+00 -1.572988e-01 1.000000e-06
+     vertex 9.100000e+00 -1.572988e-01 4.000010e-01
+   endloop
+ endfacet
+ facet normal -5.546999e-01 9.649658e-17 8.320505e-01
+   outer loop
+     vertex 9.100000e+00 8.000010e-01 4.000010e-01
+     vertex 8.500000e+00 8.000010e-01 1.000000e-06
+     vertex 9.100000e+00 -1.572988e-01 4.000010e-01
+   endloop
+ endfacet
+ facet normal 0.000000e+00 1.000000e+00 0.000000e+00
+   outer loop
+     vertex 1.090000e+01 8.000010e-01 4.000010e-01
+     vertex 8.500000e+00 8.000010e-01 1.000000e-06
+     vertex 9.100000e+00 8.000010e-01 4.000010e-01
+   endloop
+ endfacet
+ facet normal 0.000000e+00 1.000000e+00 0.000000e+00
+   outer loop
+     vertex 8.500000e+00 8.000010e-01 1.000000e-06
+     vertex 1.090000e+01 8.000010e-01 4.000010e-01
+     vertex 1.150000e+01 8.000010e-01 1.000000e-06
+   endloop
+ endfacet
+ facet normal 0.000000e+00 -1.000000e+00 0.000000e+00
+   outer loop
+     vertex 1.150000e+01 -1.572988e-01 1.000000e-06
+     vertex 9.100000e+00 -1.572988e-01 4.000010e-01
+     vertex 8.500000e+00 -1.572988e-01 1.000000e-06
+   endloop
+ endfacet
+ facet normal 0.000000e+00 -1.000000e+00 0.000000e+00
+   outer loop
+     vertex 1.150000e+01 -1.572988e-01 1.000000e-06
+     vertex 1.090000e+01 -1.572988e-01 4.000010e-01
+     vertex 9.100000e+00 -1.572988e-01 4.000010e-01
+   endloop
+ endfacet
+endsolid diqueMixto
