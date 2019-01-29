@@ -1,0 +1,16 @@
+#!/bin/sh
+
+cd ${0%/*} || exit 1    # Run from this directory
+
+# Set application name
+#application=`getApplication`
+
+blockMesh > blockMesh.log
+topoSet
+subsetMesh -overwrite c0 -patch floatingObject
+cp -r 0.orig 0 > /dev/null 2>&1
+setFields > setFields.log
+olaDyMFlow >> olaDyMFlow.log
+
+
+# ----------------------------------------------------------------- end-of-file

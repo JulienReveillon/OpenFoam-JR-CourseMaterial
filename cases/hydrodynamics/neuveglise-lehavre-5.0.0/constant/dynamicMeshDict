@@ -1,0 +1,74 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.1                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      motionProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dynamicFvMesh       dynamicMotionSolverFvMesh;
+
+motionSolverLibs   ("librigidBodyMeshMotion.so");
+
+solver             rigidBodyMotion;
+
+rigidBodyMotionCoeffs
+{
+    report          on;
+
+    solver
+    {
+        type Newmark;
+    }
+
+    accelerationRelaxation 0.7; 
+
+    bodies
+    {
+        floatingObject
+        {
+            //report          on;
+            type            cuboid;
+            parent          root;
+
+            // Cuboid dimensions
+            Lx              0.1;
+            Ly              0.9;
+            Lz              0.2;
+
+            // Density of the cuboid
+            rho             500;
+
+            // Cuboid mass
+            mass            4.24;
+            L               ($Lx $Ly $Lz);
+            centreOfMass    (0 0 0);
+	    transform	    (1 0 0 0 1 0 0 0 1)(33.35 0.45 0.60);
+            joint
+            {
+                type            composite;
+                joints
+                (
+                    {
+                        type Pz;
+                    }
+                );
+            }
+
+            patches         (floatingObject);
+            innerDistance   0.01;
+            outerDistance   0.5;
+        }
+    }
+}
+
+
+// ************************************************************************* //
