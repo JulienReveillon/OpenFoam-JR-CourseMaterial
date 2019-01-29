@@ -14,9 +14,9 @@ import matplotlib.gridspec as gridspec
 from   matplotlib.backends.backend_pdf import PdfPages
 
 # ================Definition Parameters================
-fetch =input('Please enter the fetch (m)\n')   # 
+fetch =input('Please enter the fetch - constant wind velocity distance (m)\n')   # 
 
-u10 =input('Please enter the u10 (m/s)\n')    # Velocity of the wind 10m above from the sea level
+u10 =input('Please enter the u10 (m/s) - wind velocity 10m above water \n')    # Velocity of the wind 10m above from the sea level
  
 g=9.81         # Gravity Force
 
@@ -24,7 +24,7 @@ g=9.81         # Gravity Force
 
 gamma = 3.3    # 3.3 common value
 
-tEnd = 50    # Studied time
+tEnd = 10    # Studied time
 
 rho = 1000     # density of the water (kg/m3)
 

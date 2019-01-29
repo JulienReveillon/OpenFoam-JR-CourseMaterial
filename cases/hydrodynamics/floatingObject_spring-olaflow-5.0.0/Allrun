@@ -14,10 +14,10 @@ read wavetype
 echo "Please enter the studied time"
 read endtime
 
-echo "Please enter the spring stiffness"
+echo "Please enter the spring stiffness k (N/m) "
 read stiffness
 
-echo "Please enter the spring restlength"
+echo "Please enter the spring restlength (m)"
 read l0
 
 cp orig/controlDict system/controlDict

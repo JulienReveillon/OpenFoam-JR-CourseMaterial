@@ -3,6 +3,12 @@
 print('x..............................................................x')
 print('x...             OpenFOAM - www.foam-u.fr                   ...x')
 print('x..............................................................x')
+
+#
+# postprocessing script reading the olaflow.log output.
+# plot center of mass position vs time
+#
+
 # ==================================
 # ==> Python Module Importations <==
 # ==================================
@@ -26,7 +32,7 @@ controlDir = os.path.join(pathname,'system/controlDict')
 #================Parameters (H,T,d,L,rho,tBegin,tEnd,tStep)================
 
 tBegin = 0 #float(raw_input("Please enter the start time(s) tBegin: "))
-tEnd   = 29 #float(raw_input("Please enter the end time(s) tEnd: "))
+tEnd   = 10 #float(raw_input("Please enter the end time(s) tEnd: "))
 
 rhoW = 1000 # Change this value if needed         
 
